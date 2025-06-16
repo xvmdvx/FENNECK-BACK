@@ -66,3 +66,36 @@ Con el servidor en marcha abre `fennec_assistant.html` en tu navegador.
 Por defecto busca la API en `http://localhost:8000`, por lo que si cambiaste
 el puerto asegúrate de modificar la URL en el código o ajustar la variable
 `PORT` antes de abrir el archivo.
+
+## 🛠️ Automatizar el servidor
+
+Si deseas evitar los pasos manuales cada vez que inicias el sistema,
+puedes registrar el script `start.sh` como un servicio `systemd` (Linux).
+
+1. Crea el archivo `/etc/systemd/system/fennec.service` con el siguiente contenido:
+
+```ini
+[Unit]
+Description=Servidor Fennec AI
+After=network.target
+
+[Service]
+User=<TU_USUARIO>
+WorkingDirectory=/ruta/a/FENNECK-BACK
+ExecStart=/ruta/a/FENNECK-BACK/start.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reemplaza `<TU_USUARIO>` y las rutas según tu entorno.
+Luego ejecuta:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now fennec.service
+```
+
+El servidor quedará activo en segundo plano y podrás abrir
+`fennec_assistant.html` directamente cuando lo necesites.
