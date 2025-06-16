@@ -24,9 +24,9 @@ def client(monkeypatch):
     root_dir = os.path.dirname(os.path.dirname(__file__))
     sys.path.insert(0, root_dir)
 
-    server = importlib.import_module("server")
-    importlib.reload(server)
-    return TestClient(server.app)
+    module = importlib.import_module("vector_rag_fennec")
+    importlib.reload(module)
+    return TestClient(module.app)
 
 
 def test_chat_endpoint(client):
