@@ -2,6 +2,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+# default rules file location
+ENV RULES_FILE=Bizee_rules.txt
+
 COPY requirements.txt .
 RUN python -m venv venv \
     && . venv/bin/activate \
