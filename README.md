@@ -36,6 +36,13 @@ fetch("http://localhost:8000/api/chat", {
 
 Modelo usado: `mistral-7b-instruct-v0.1.Q4_K_M.gguf`
 
+## ✅ Ejecutar pruebas
+
+Para correr las pruebas unitarias usa `pytest`:
+
+```bash
+pytest
+```
 ## 📄 Licencia
 
 Este proyecto está bajo la [Licencia MIT](LICENSE).
