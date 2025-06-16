@@ -33,6 +33,9 @@
             display: flex;
             gap: 1rem;
         }
+        #configArea {
+            margin: 1rem 0;
+        }
         textarea {
             flex-grow: 1;
             padding: 1rem;
@@ -64,6 +67,9 @@
 </head>
 <body>
     <h1>🦊 FENNEC Assistant</h1>
+    <div id="configArea">
+        <input type="text" id="baseUrl" value="http://localhost:8000" placeholder="API base URL" />
+    </div>
     <div id="chatbox"></div>
     <div id="inputArea">
         <textarea id="userInput" placeholder="Ask FENNEC anything..."></textarea>
@@ -79,7 +85,8 @@
 
             chatbox.innerHTML += "\n<span class='user'>You: " + message + "</span>";
 
-            const res = await fetch("http://localhost:8000/api/chat", {
+            const base = (document.getElementById("baseUrl")?.value.trim()) || window.location.origin;
+            const res = await fetch(base + "/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ prompt: message })

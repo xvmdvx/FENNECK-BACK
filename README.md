@@ -63,6 +63,6 @@ docker run -p 8000:8000 fennec-back
 ## Abrir la interfaz
 
 Con el servidor en marcha abre `fennec_assistant.html` en tu navegador.
-Por defecto busca la API en `http://localhost:8000`, por lo que si cambiaste
-el puerto asegúrate de modificar la URL en el código o ajustar la variable
-`PORT` antes de abrir el archivo.
+La página ahora incluye un campo donde puedes indicar la URL base de la API.
+Se inicializa con `http://localhost:8000`, pero puedes cambiarlo en tiempo de ejecución
+o dejarlo vacío para que use el origen de la página (`window.location.origin`).
