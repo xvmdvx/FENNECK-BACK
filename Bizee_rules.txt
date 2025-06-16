@@ -1,0 +1,3 @@
+Wyoming does not allow virtual addresses for members.
+A Registered Agent must have a physical address in the state.
+The BOI report must be submitted within 30 days of formation.

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FENNEC Assistant</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        h1 {
+            color: #ffcc00;
+        }
+        #chatbox {
+            width: 80%;
+            max-width: 800px;
+            background-color: #2a2a2a;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        #inputArea {
+            width: 80%;
+            max-width: 800px;
+            display: flex;
+            gap: 1rem;
+        }
+        textarea {
+            flex-grow: 1;
+            padding: 1rem;
+            border-radius: 10px;
+            border: none;
+            resize: none;
+            height: 60px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 0 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 10px;
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            cursor: pointer;
+        }
+        .user, .fennec {
+            margin: 0.5rem 0;
+        }
+        .user {
+            color: #00ffff;
+        }
+        .fennec {
+            color: #ffa07a;
+        }
+    </style>
+</head>
+<body>
+    <h1>🦊 FENNEC Assistant</h1>
+    <div id="chatbox"></div>
+    <div id="inputArea">
+        <textarea id="userInput" placeholder="Ask FENNEC anything..."></textarea>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById("userInput");
+            const chatbox = document.getElementById("chatbox");
+            const message = input.value.trim();
+            if (!message) return;
+
+            chatbox.innerHTML += "\n<span class='user'>You: " + message + "</span>";
+
+            const res = await fetch("http://localhost:8000/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: message })
+            });
+
+            const data = await res.json();
+            chatbox.innerHTML += "\n<span class='fennec'>FENNEC: " + data.response + "</span>";
+            chatbox.scrollTop = chatbox.scrollHeight;
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
