@@ -2,8 +2,10 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from llama_cpp import Llama
+import os
 
-MODEL_PATH = "./mistral-7b-instruct-v0.1.Q4_K_M.gguf"
+MODEL_PATH = os.getenv("MODEL_PATH", "./mistral-7b-instruct-v0.1.Q4_K_M.gguf")
+PORT = int(os.getenv("PORT", "8000"))
 
 app = FastAPI()
 app.add_middleware(
