@@ -36,6 +36,19 @@ fetch("http://localhost:8000/api/chat", {
 
 Modelo usado: `mistral-7b-instruct-v0.1.Q4_K_M.gguf`
 
+## 🐳 Docker
+
+Para construir la imagen ejecuta:
+
+```bash
+docker build -t fennec-back .
+```
+
+Y para iniciar el contenedor mapea el puerto 8000:
+
+```bash
+docker run -p 8000:8000 fennec-back
+```
 ## Abrir la interfaz
 
 Con el servidor en marcha abre `fennec_assistant.html` en tu navegador.
