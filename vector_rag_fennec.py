@@ -8,7 +8,9 @@ from langchain.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import TextLoader
 
-docs = TextLoader("Bizee_rules.txt").load()
+# determine rules path from environment
+RULES_FILE = os.getenv("RULES_FILE", "Bizee_rules.txt")
+docs = TextLoader(RULES_FILE).load()
 chunks = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200).split_documents(docs)
 vectordb = Chroma.from_documents(chunks, embedding=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2"))
 
