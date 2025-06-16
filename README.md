@@ -36,6 +36,10 @@ fetch("http://localhost:8000/api/chat", {
 
 Modelo usado: `mistral-7b-instruct-v0.1.Q4_K_M.gguf`
 
+## 📄 Licencia
+
+Este proyecto está bajo la [Licencia MIT](LICENSE).
+
 ## 🐳 Docker
 
 Para construir la imagen ejecuta:
