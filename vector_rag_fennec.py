@@ -2,6 +2,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from llama_cpp import Llama
+import logging
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -14,11 +15,16 @@ vectordb = Chroma.from_documents(chunks, embedding=HuggingFaceEmbeddings(model_n
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-llm = Llama(
-    model_path="./mistral-7b-instruct-v0.1.Q4_K_M.gguf",
-    n_ctx=2048, n_threads=8, n_gpu_layers=35,
-    chat_format="mistral-instruct"
-)
+logger = logging.getLogger(__name__)
+llm = None
+try:
+    llm = Llama(
+        model_path="./mistral-7b-instruct-v0.1.Q4_K_M.gguf",
+        n_ctx=2048, n_threads=8, n_gpu_layers=35,
+        chat_format="mistral-instruct"
+    )
+except Exception as e:
+    logger.exception(f"Failed to load model: {e}")
 
 SYSTEM_PROMPT = (
     "You are FENNEC, a legal assistant trained for business filings. "
@@ -30,6 +36,8 @@ async def chat(req: Request):
     q = (await req.json()).get("prompt", "").strip()
     if not q:
         return {"response": "Please ask about filing or compliance."}
+    if llm is None:
+        return {"error": "Language model is not available"}
 
     relevant = vectordb.similarity_search(q, k=3)
     context = "\n".join(chunk.page_content for chunk in relevant)
