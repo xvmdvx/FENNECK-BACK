@@ -13,6 +13,15 @@ pip install -r requirements.txt
 ./start.sh
 ```
 
+Puedes personalizar la ruta del modelo y el puerto exportando las
+variables de entorno `MODEL_PATH` y `PORT` antes de arrancar:
+
+```bash
+export MODEL_PATH=/ruta/al/modelo.gguf
+export PORT=9000
+./start.sh
+```
+
 ## 🧪 Cómo probar
 
 Desde consola del navegador:
@@ -40,3 +49,9 @@ Y para iniciar el contenedor mapea el puerto 8000:
 ```bash
 docker run -p 8000:8000 fennec-back
 ```
+## Abrir la interfaz
+
+Con el servidor en marcha abre `fennec_assistant.html` en tu navegador.
+Por defecto busca la API en `http://localhost:8000`, por lo que si cambiaste
+el puerto asegúrate de modificar la URL en el código o ajustar la variable
+`PORT` antes de abrir el archivo.
