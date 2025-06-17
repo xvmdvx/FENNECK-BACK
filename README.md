@@ -68,6 +68,12 @@ Por defecto busca la API en `http://localhost:8000`, por lo que si cambiaste
 el puerto asegúrate de modificar la URL en el código o ajustar la variable
 `PORT` antes de abrir el archivo.
 
+Además se incluye la página `index.html` que muestra un asistente por pasos.
+Su lógica se encuentra en `script.js` y la estructura de datos en
+`data/stepsData.json`, los cuales se cargan de forma externa cuando se abre
+la página. Mantén estos archivos en el mismo directorio para que el navegador
+pueda localizarlos sin problemas.
+
 ## 🛠️ Automatizar el servidor
 
 Si deseas evitar los pasos manuales cada vez que inicias el sistema,
