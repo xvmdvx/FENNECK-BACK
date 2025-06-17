@@ -76,6 +76,16 @@ Su lógica se encuentra en `script.js` y la estructura de datos en
 la página. Mantén estos archivos en el mismo directorio para que el navegador
 pueda localizarlos sin problemas.
 
+Para evitar errores al cargar los archivos JSON, ejecuta `index.html` mediante el
+script `serve_index.sh`. Este comando inicia un servidor HTTP sencillo y abre la
+página automáticamente:
+
+```bash
+./serve_index.sh
+```
+
+Puedes cambiar el puerto estableciendo la variable `PORT` antes de ejecutarlo.
+
 ## 🛠️ Automatizar el servidor
 
 Si deseas evitar los pasos manuales cada vez que inicias el sistema,
