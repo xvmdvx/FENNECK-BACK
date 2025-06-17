@@ -13,15 +13,17 @@ pip install -r requirements.txt
 ./start.sh
 ```
 
-Puedes personalizar la ruta del modelo, el puerto y el archivo de reglas exportando las
-variables de entorno `MODEL_PATH`, `PORT` y `RULES_FILE` antes de arrancar:
+Puedes personalizar la ruta del modelo, el puerto, los orígenes permitidos y el archivo de reglas exportando las
+variables de entorno `MODEL_PATH`, `PORT`, `ALLOWED_ORIGINS` y `RULES_FILE` antes de arrancar:
 
 ```bash
 export MODEL_PATH=/ruta/al/modelo.gguf
 export PORT=9000
 export RULES_FILE=/ruta/a/mis_reglas.txt
+export ALLOWED_ORIGINS=http://localhost:3000
 ./start.sh
 ```
+Puedes indicar varios orígenes separándolos con comas.
 
 ## 🧪 Cómo probar
 
