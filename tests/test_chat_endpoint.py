@@ -21,6 +21,9 @@ def client(monkeypatch):
     dummy_module.Llama = DummyLlama
     monkeypatch.setitem(sys.modules, "llama_cpp", dummy_module)
 
+    # set allowed origins for CORS tests
+    monkeypatch.setenv("ALLOWED_ORIGINS", "http://testhost")
+
     # Provide lightweight stand-ins for langchain components to avoid heavy
     # dependencies when importing the application module.
     langchain_pkg = types.ModuleType("langchain")
@@ -84,3 +87,14 @@ def test_chat_endpoint(client):
     assert resp.status_code == 200
     data = resp.json()
     assert "response" in data
+
+
+def test_cors_allows_configured_origin(client):
+    resp = client.options(
+        "/api/chat",
+        headers={
+            "Origin": "http://testhost",
+            "Access-Control-Request-Method": "POST",
+        },
+    )
+    assert resp.headers.get("access-control-allow-origin") == "http://testhost"

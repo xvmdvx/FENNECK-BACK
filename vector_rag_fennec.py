@@ -15,7 +15,17 @@ chunks = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200).spli
 vectordb = Chroma.from_documents(chunks, embedding=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2"))
 
 app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+
+# determine allowed CORS origins from environment, comma separated
+default_origins = "http://localhost:3000"
+origins_str = os.getenv("ALLOWED_ORIGINS", default_origins)
+origins = [o.strip() for o in origins_str.split(",") if o.strip()]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 MODEL_PATH = os.getenv("MODEL_PATH", "./mistral-7b-instruct-v0.1.Q4_K_M.gguf")
 PORT = int(os.getenv("PORT", "8000"))
