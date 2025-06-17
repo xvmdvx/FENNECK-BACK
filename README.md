@@ -76,15 +76,25 @@ Su lógica se encuentra en `script.js` y la estructura de datos en
 la página. Mantén estos archivos en el mismo directorio para que el navegador
 pueda localizarlos sin problemas.
 
-Para evitar errores al cargar los archivos JSON, ejecuta `index.html` mediante el
-script `serve_index.sh`. Este comando inicia un servidor HTTP sencillo y abre la
-página automáticamente:
+Para evitar errores al cargar los archivos JSON, ejecuta `index.html` con el
+script `serve_index.py`. Esta utilidad inicia un servidor HTTP sencillo y abre
+la página automáticamente:
 
 ```bash
-./serve_index.sh
+python3 serve_index.py
 ```
 
 Puedes cambiar el puerto estableciendo la variable `PORT` antes de ejecutarlo.
+
+Si utilizas macOS y prefieres contar con una aplicación `.app`, puedes generar
+una con `pyinstaller`:
+
+```bash
+pip install pyinstaller
+pyinstaller --onefile --windowed serve_index.py
+```
+
+El paquete resultante se ubicará en `dist/` y podrás lanzarlo con doble clic.
 
 ## 🛠️ Automatizar el servidor
 
