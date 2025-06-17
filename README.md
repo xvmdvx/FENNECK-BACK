@@ -86,15 +86,8 @@ python3 serve_index.py
 
 Puedes cambiar el puerto estableciendo la variable `PORT` antes de ejecutarlo.
 
-Si utilizas macOS y prefieres contar con una aplicación `.app`, puedes generar
-una con `pyinstaller`:
-
-```bash
-pip install pyinstaller
-pyinstaller --onefile --windowed serve_index.py
-```
-
-El paquete resultante se ubicará en `dist/` y podrás lanzarlo con doble clic.
+En macOS se incluye el paquete `ServeIndex.app` para abrir el visor con doble
+clic. Arrástralo a la ubicación que prefieras y ejecútalo.
 
 ## 🛠️ Automatizar el servidor
 
