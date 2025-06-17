@@ -4,3 +4,5 @@ uvicorn
 langchain
 chromadb
 sentence-transformers
+httpx
+pytest
